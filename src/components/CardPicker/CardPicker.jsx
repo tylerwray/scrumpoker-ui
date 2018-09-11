@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import Card from './Card/Card.jsx'
 
@@ -25,14 +25,14 @@ class CardPicker extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className="container">
         <div id="selected">{this.state.selectedNumber}</div>
         <div id="card-picker">
           {numbers.map(x => (
             <Card key={x} number={x} onClick={this.selectNumber} />
           ))}
         </div>
-      </Fragment>
+      </div>
     )
   }
 }

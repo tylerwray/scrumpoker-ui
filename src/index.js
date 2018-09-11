@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App.jsx'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import { CardPicker } from './components'
+
+import './index.css'
+
+ReactDOM.render(<CardPicker />, document.getElementById('root'))
 registerServiceWorker()
