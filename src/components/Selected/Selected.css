@@ -11,10 +11,23 @@
   background-color: green;
   width: 2.25em;
   height: 3em;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+#selected.card-shown {
+  transition: transform 500ms, color 150ms 200ms ease-in-out;
+}
+
+#selected.card-hidden {
+  transition: transform 500ms, color 0ms;
+  transform: rotateY(180deg);
+  color: transparent;
 }
 
 #back-arrow {
   position: absolute;
+  z-index: 2;
   margin: 10px;
   padding: 3px;
   border-radius: 50%;
@@ -22,10 +35,14 @@
   transition: background-color 200ms ease-in-out;
 }
 
-#back-arrow:hover {
-  background-color: #424242;
-}
 #selected-container {
   display: flex;
   justify-content: center;
+  perspective: 1000px;
+}
+
+@media not all and (hover: none) {
+  #back-arrow:hover {
+    background-color: #424242;
+  }
 }
