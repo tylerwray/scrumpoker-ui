@@ -4,9 +4,13 @@ import { BrowserRouter } from 'react-router-dom'
 import Routes from './Routes'
 import { Provider } from 'react-redux'
 
-import store from './state/store'
+import { configureStore } from '../state/store'
+
+import './App.css'
 
 function App() {
+  const store = configureStore()
+
   return (
     <Provider store={store}>
       <BrowserRouter>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { CardPicker, Selected } from './components'
+import CardPicker from './containers/CardPicker'
+import Selected from './containers/Selected'
 
 function Routes() {
   return (

@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import './Selected.css'
 
@@ -21,7 +20,7 @@ class Selected extends React.Component {
   }
 
   render() {
-    const { number, history } = this.props
+    const { history, selected } = this.props
     const { cardShown } = this.state
 
     return (
@@ -45,7 +44,7 @@ class Selected extends React.Component {
             className={cardShown ? 'card-shown' : 'card-hidden'}
             onClick={this.flipCard}
           >
-            {number}
+            {selected}
           </div>
         </div>
       </React.Fragment>
@@ -53,12 +52,4 @@ class Selected extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log(state)
-
-  return {
-    number: state
-  }
-}
-
-export default connect(mapStateToProps)(Selected)
+export default Selected
