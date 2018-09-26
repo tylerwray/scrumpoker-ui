@@ -1,18 +1,25 @@
 import React from 'react'
-
-import { PokerContext } from './PokerContext'
 import { BrowserRouter } from 'react-router-dom'
+
 import Routes from './Routes'
+import Layout from './Layout'
+import { PokerContext } from './PokerContext'
+import { ThemeContext } from '../theme'
+import { getCardColor, setCardColor } from '../storage'
 
 class App extends React.Component {
   state = {
     selected: 0,
-    numbers: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
+    numbers: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144],
+    theme: {
+      cardColor: getCardColor()
+    }
   }
 
   constructor(props) {
     super(props)
     this.changeSelected = this.changeSelected.bind(this)
+    this.updateTheme = this.updateTheme.bind(this)
   }
 
   changeSelected(selected) {
@@ -21,9 +28,23 @@ class App extends React.Component {
     })
   }
 
-  render() {
-    const { selected, numbers } = this.state
+  updateTheme(theme) {
+    this.setState(prevState => {
+      if (theme.cardColor) {
+        setCardColor(theme.cardColor)
+      }
 
+      return {
+        theme: {
+          ...prevState.theme,
+          ...theme
+        }
+      }
+    })
+  }
+
+  render() {
+    const { selected, numbers, theme } = this.state
     return (
       <PokerContext.Provider
         value={{
@@ -32,9 +53,18 @@ class App extends React.Component {
           changeSelected: this.changeSelected
         }}
       >
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
+        <ThemeContext.Provider
+          value={{
+            theme,
+            updateTheme: this.updateTheme
+          }}
+        >
+          <BrowserRouter>
+            <Layout>
+              <Routes />
+            </Layout>
+          </BrowserRouter>
+        </ThemeContext.Provider>
       </PokerContext.Provider>
     )
   }

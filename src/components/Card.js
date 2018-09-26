@@ -1,13 +1,14 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
 import { css } from 'emotion'
+
+import { withTheme } from '../theme'
 
 const card = css`
   color: #ffffff;
   margin: 15% auto;
   border: 2px solid #ffffff;
   border-radius: 5px;
-  background-color: green;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -24,13 +25,16 @@ const card = css`
 `
 
 function Card(props) {
-  const { history, number, onClick } = props
+  const { number, onClick, theme } = props
+
+  const themedCard = css`
+    background-color: ${theme.cardColor};
+  `
 
   return (
     <div
-      className={card}
+      className={classNames(card, themedCard)}
       onClick={() => {
-        history.push('/ready')
         onClick(number)
       }}
     >
@@ -39,4 +43,4 @@ function Card(props) {
   )
 }
 
-export default withRouter(Card)
+export default withTheme(Card)

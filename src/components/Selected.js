@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import { css } from 'emotion'
 
 import { PokerContext } from './PokerContext'
+import { withTheme } from '../theme'
+import BackIcon from './BackIcon'
 
 const container = css`
   display: flex;
@@ -20,7 +22,6 @@ const card = css`
   color: #ffffff;
   border: 4px solid #ffffff;
   border-radius: 8px;
-  background-color: green;
   width: 2.25em;
   height: 3em;
   cursor: pointer;
@@ -35,22 +36,6 @@ const cardHidden = css`
   transition: transform 500ms, color 0ms;
   transform: rotateY(180deg);
   color: transparent;
-`
-
-const backArrow = css`
-  position: absolute;
-  z-index: 2;
-  margin: 10px;
-  padding: 3px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 200ms ease-in-out;
-
-  @media not all and (hover: none) {
-    :hover {
-      background-color: #424242;
-    }
-  }
 `
 
 class Selected extends React.Component {
@@ -71,26 +56,25 @@ class Selected extends React.Component {
   }
 
   render() {
-    const { history } = this.props
+    const { history, theme } = this.props
     const { cardRevealed } = this.state
 
-    const selected = classNames(card, cardRevealed ? cardVisible : cardHidden)
+    const themedCard = css`
+      background-color: ${theme.cardColor};
+    `
+    const selected = classNames(
+      card,
+      themedCard,
+      cardRevealed ? cardVisible : cardHidden
+    )
 
     return (
       <React.Fragment>
-        <svg
+        <BackIcon
           onClick={() => {
             history.push('/')
           }}
-          className={backArrow}
-          width="42"
-          height="42"
-          fill="#fff"
-          viewBox="0 0 24 24"
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-        </svg>
+        />
         <div className={container}>
           <div className={selected} onClick={this.flipCard}>
             <PokerContext.Consumer>
@@ -103,4 +87,4 @@ class Selected extends React.Component {
   }
 }
 
-export default Selected
+export default withTheme(Selected)

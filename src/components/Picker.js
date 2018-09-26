@@ -6,20 +6,29 @@ import { css } from 'emotion'
 
 const picker = css`
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
 `
 
-function Picker() {
+function Picker({ history }) {
   return (
-    <PokerContext.Consumer>
-      {({ numbers, changeSelected }) => (
-        <div className={picker}>
-          {numbers.map(x => (
-            <Card key={x} number={x} onClick={changeSelected} />
-          ))}
-        </div>
-      )}
-    </PokerContext.Consumer>
+    <React.Fragment>
+      <PokerContext.Consumer>
+        {({ numbers, changeSelected }) => (
+          <div className={picker}>
+            {numbers.map(x => (
+              <Card
+                key={x}
+                number={x}
+                onClick={selected => {
+                  history.push('/ready')
+                  changeSelected(selected)
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </PokerContext.Consumer>
+    </React.Fragment>
   )
 }
 
