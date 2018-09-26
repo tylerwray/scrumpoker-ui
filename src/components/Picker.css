@@ -1,9 +1,0 @@
-#card-picker {
-  text-align: center;
-  width: 100%;
-}
-
-#picker {
-  display: grid;
-  grid-template-columns: auto auto auto;
-}

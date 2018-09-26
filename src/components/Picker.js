@@ -2,14 +2,18 @@ import React from 'react'
 
 import { PokerContext } from './PokerContext'
 import Card from './Card'
+import { css } from 'emotion'
 
-import './Picker.css'
+const picker = css`
+  display: grid;
+  grid-template-columns: auto auto auto;
+`
 
 function Picker() {
   return (
     <PokerContext.Consumer>
       {({ numbers, changeSelected }) => (
-        <div id="picker">
+        <div className={picker}>
           {numbers.map(x => (
             <Card key={x} number={x} onClick={changeSelected} />
           ))}
