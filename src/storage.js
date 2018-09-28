@@ -1,7 +1,8 @@
-const CARD_COLOR_KEY = 'card-color-837'
-export function getCardColor() {
-  const defaultCardColor = '#0097a7'
+import { defaultCardColor } from './theme'
 
+const CARD_COLOR_KEY = 'card-color-837'
+
+export function getCardColor() {
   const color = localStorage.getItem(CARD_COLOR_KEY)
 
   return color || defaultCardColor

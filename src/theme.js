@@ -1,5 +1,7 @@
 import React from 'react'
 
+export const defaultCardColor = '#0097a7'
+
 export const ThemeContext = React.createContext()
 
 export function withTheme(Component) {
