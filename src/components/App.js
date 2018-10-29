@@ -1,73 +1,70 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
 import Routes from './Routes'
 import Layout from './Layout'
 import { PokerContext, defaultNumbers } from './PokerContext'
-import { ThemeContext } from '../theme'
-import { getCardColor, setCardColor } from '../storage'
+import { ThemeContext, defaultCardColor } from '../theme'
 
-class App extends React.Component {
-  state = {
-    selected: 0,
-    numbers: defaultNumbers,
-    theme: {
-      cardColor: getCardColor()
-    }
+const CARD_COLOR_KEY = 'card-color-837'
+
+function getCardColor() {
+  const color = localStorage.getItem(CARD_COLOR_KEY)
+
+  return color || defaultCardColor
+}
+
+function setCardColor(color) {
+  try {
+    localStorage.setItem(CARD_COLOR_KEY, color)
+  } catch (err) {
+    // Do Nothing
   }
+}
 
-  constructor(props) {
-    super(props)
-    this.changeSelected = this.changeSelected.bind(this)
-    this.updateTheme = this.updateTheme.bind(this)
-  }
+function App() {
+  const [selected, setSelected] = useState(0)
+  const numbers = defaultNumbers
+  const [theme, setTheme] = useState({
+    cardColor: getCardColor()
+  })
 
-  changeSelected(selected) {
-    this.setState({
-      selected
+  useEffect(
+    () => {
+      setCardColor(theme.cardColor)
+    },
+    [theme.cardColor]
+  )
+
+  function updateTheme(newTheme) {
+    setTheme({
+      ...theme,
+      ...newTheme
     })
   }
 
-  updateTheme(theme) {
-    this.setState(prevState => {
-      if (theme.cardColor) {
-        setCardColor(theme.cardColor)
-      }
-
-      return {
-        theme: {
-          ...prevState.theme,
-          ...theme
-        }
-      }
-    })
-  }
-
-  render() {
-    const { selected, numbers, theme } = this.state
-    return (
-      <PokerContext.Provider
+  return (
+    <PokerContext.Provider
+      value={{
+        selected,
+        numbers,
+        changeSelected: setSelected
+      }}
+    >
+      <ThemeContext.Provider
         value={{
-          selected,
-          numbers,
-          changeSelected: this.changeSelected
+          theme,
+          updateTheme
         }}
       >
-        <ThemeContext.Provider
-          value={{
-            theme,
-            updateTheme: this.updateTheme
-          }}
-        >
-          <BrowserRouter>
-            <Layout>
-              <Routes />
-            </Layout>
-          </BrowserRouter>
-        </ThemeContext.Provider>
-      </PokerContext.Provider>
-    )
-  }
+        <BrowserRouter>
+          <Layout>
+            <Routes />
+          </Layout>
+        </BrowserRouter>
+      </ThemeContext.Provider>
+    </PokerContext.Provider>
+  )
 }
 
 export default App

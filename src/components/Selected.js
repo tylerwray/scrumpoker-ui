@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import { css } from 'emotion'
 
@@ -38,53 +38,38 @@ const cardHidden = css`
   color: transparent;
 `
 
-class Selected extends React.Component {
-  state = {
-    cardRevealed: false
+function Selected({ history, theme }) {
+  const [cardRevealed, setCardRevealed] = useState(false)
+
+  function flipCard() {
+    setCardRevealed(!cardRevealed)
   }
 
-  constructor(props) {
-    super(props)
+  const themedCard = css`
+    background-color: ${theme.cardColor};
+  `
+  const selected = classNames(
+    card,
+    themedCard,
+    cardRevealed ? cardVisible : cardHidden
+  )
 
-    this.flipCard = this.flipCard.bind(this)
-  }
-
-  flipCard() {
-    this.setState(prevState => ({
-      cardRevealed: !prevState.cardRevealed
-    }))
-  }
-
-  render() {
-    const { history, theme } = this.props
-    const { cardRevealed } = this.state
-
-    const themedCard = css`
-      background-color: ${theme.cardColor};
-    `
-    const selected = classNames(
-      card,
-      themedCard,
-      cardRevealed ? cardVisible : cardHidden
-    )
-
-    return (
-      <React.Fragment>
-        <BackIcon
-          onClick={() => {
-            history.push('/')
-          }}
-        />
-        <div className={container}>
-          <div className={selected} onClick={this.flipCard}>
-            <PokerContext.Consumer>
-              {({ selected }) => selected}
-            </PokerContext.Consumer>
-          </div>
+  return (
+    <React.Fragment>
+      <BackIcon
+        onClick={() => {
+          history.push('/')
+        }}
+      />
+      <div className={container}>
+        <div className={selected} onClick={flipCard}>
+          <PokerContext.Consumer>
+            {({ selected }) => selected}
+          </PokerContext.Consumer>
         </div>
-      </React.Fragment>
-    )
-  }
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default withTheme(Selected)
