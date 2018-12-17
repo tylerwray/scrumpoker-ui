@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { css } from 'emotion'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import SettingsIcon from './SettingsIcon'
 
@@ -21,9 +21,13 @@ const fab = css`
   }
 `
 
-function Layout({ children, history }) {
+interface Props extends RouteComponentProps {
+  children: ReactNode
+}
+
+function Layout({ children, history }: Props) {
   return (
-    <React.Fragment>
+    <>
       {children}
       <SettingsIcon
         className={fab}
@@ -31,7 +35,7 @@ function Layout({ children, history }) {
           history.push('/settings')
         }}
       />
-    </React.Fragment>
+    </>
   )
 }
 

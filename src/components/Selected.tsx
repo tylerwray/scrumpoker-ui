@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import { css } from 'emotion'
 
-import { PokerContext } from './PokerContext'
-import { withTheme } from '../theme'
+import { withCards } from './PokerContext'
+import { withTheme, Theme } from './ThemeContext'
 import BackIcon from './BackIcon'
+import { RouteComponentProps } from 'react-router'
 
 const container = css`
   display: flex;
@@ -38,7 +39,12 @@ const cardHidden = css`
   color: transparent;
 `
 
-function Selected({ history, theme }) {
+interface Props extends RouteComponentProps {
+  theme: Theme
+  selected: number
+}
+
+function Selected({ history, theme, selected }: Props) {
   const [cardRevealed, setCardRevealed] = useState(false)
 
   function flipCard() {
@@ -48,28 +54,26 @@ function Selected({ history, theme }) {
   const themedCard = css`
     background-color: ${theme.cardColor};
   `
-  const selected = classNames(
+  const selectedClassNames = classNames(
     card,
     themedCard,
     cardRevealed ? cardVisible : cardHidden
   )
 
   return (
-    <React.Fragment>
+    <>
       <BackIcon
         onClick={() => {
           history.push('/')
         }}
       />
       <div className={container}>
-        <div className={selected} onClick={flipCard}>
-          <PokerContext.Consumer>
-            {({ selected }) => selected}
-          </PokerContext.Consumer>
+        <div className={selectedClassNames} onClick={flipCard}>
+          {selected}
         </div>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
-export default withTheme(Selected)
+export default withTheme(withCards(Selected))

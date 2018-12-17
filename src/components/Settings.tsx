@@ -1,9 +1,10 @@
 import React from 'react'
 import { SwatchesPicker } from 'react-color'
 
-import { withTheme } from '../theme'
+import { withTheme, Theme } from './ThemeContext'
 import BackIcon from './BackIcon'
 import { css } from 'emotion'
+import { RouteComponentProps } from 'react-router'
 
 const container = css`
   display: flex;
@@ -17,26 +18,31 @@ const picker = css`
   margin: 15% auto;
 `
 
-function Settings({ history, theme, updateTheme }) {
+interface Color {
+  hex: string
+}
+
+interface Props extends RouteComponentProps {
+  theme: Theme
+  updateTheme(theme: Theme): void
+}
+
+function Settings({ history, theme, updateTheme }: Props) {
   return (
-    <React.Fragment>
-      <BackIcon
-        onClick={() => {
-          history.goBack()
-        }}
-      />
+    <>
+      <BackIcon onClick={history.goBack} />
       <div className={container}>
         <SwatchesPicker
           className={picker}
           triangle="hide"
           color={theme.cardColor}
           height={500}
-          onChange={color => {
+          onChange={(color: Color) => {
             updateTheme({ cardColor: color.hex })
           }}
         />
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
