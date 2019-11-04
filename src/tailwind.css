@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-fade {
+  transition: background-color 200ms ease-in-out;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-fit {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}

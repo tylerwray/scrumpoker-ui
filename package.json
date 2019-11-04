@@ -1,39 +1,46 @@
 {
   "name": "scrumpoker",
-  "version": "0.1.0",
   "private": true,
+  "description": "A simple application to help software teams size work.",
+  "version": "0.1.0",
+  "author": "Tyler Wray <wraytw@gmail.com>",
   "dependencies": {
-    "@types/classnames": "^2.2.6",
-    "@types/history": "^4.7.2",
-    "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.15",
-    "@types/react": "^16.7.17",
-    "@types/react-dom": "^16.0.11",
-    "@types/react-router-dom": "^4.3.1",
-    "ajv": "^6.5.4",
-    "axios": "^0.18.0",
-    "classnames": "^2.2.6",
-    "emotion": "^9.2.10",
-    "history": "^4.7.2",
-    "react": "^16.7.0-alpha.0",
-    "react-color": "^2.14.1",
-    "react-dom": "^16.7.0-alpha.0",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.1",
-    "react-testing-library": "^5.1.0",
-    "typescript": "^3.2.2"
+    "gatsby": "^2.17.6",
+    "gatsby-image": "^2.2.30",
+    "gatsby-plugin-manifest": "^2.2.25",
+    "gatsby-plugin-offline": "^3.0.17",
+    "gatsby-plugin-postcss": "^2.1.13",
+    "gatsby-plugin-react-helmet": "^3.1.13",
+    "gatsby-plugin-sharp": "^2.2.34",
+    "gatsby-source-filesystem": "^2.1.35",
+    "gatsby-transformer-sharp": "^2.3.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-helmet": "^5.2.1"
   },
+  "devDependencies": {
+    "prettier": "^1.18.2",
+    "tailwindcss": "^1.1.3"
+  },
+  "keywords": [
+    "gatsby",
+    "scrum",
+    "agile"
+  ],
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "test-coverage": "npm test -- --coverage",
-    "eject": "react-scripts eject"
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tylerwray/scrumpoker"
+  },
+  "bugs": {
+    "url": "https://github.com/tylerwray/scrumpoker/issues"
+  }
 }
