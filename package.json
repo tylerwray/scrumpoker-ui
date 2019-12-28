@@ -1,7 +1,8 @@
 {
   "name": "scrumpoker",
   "private": true,
-  "description": "A simple application to help software teams size work.",
+  "description": "A simple application to help software teams size their work.",
+  "homepage": "https://scrumpoker.org",
   "version": "0.1.0",
   "author": "Tyler Wray <wraytw@gmail.com>",
   "dependencies": {
@@ -17,7 +18,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-modal": "^3.11.1"
   },
   "devDependencies": {
     "prettier": "^1.18.2",
@@ -32,7 +34,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier --write \"**/*.{js,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve"
   },

@@ -1,8 +1,6 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
 import Card from "../components/card"
 import Layout from "../components/layout"
-import IconBackArrow from "../components/icon-back-arrow"
 import useCardColor from "../hooks/useCardColor"
 
 const Ready = ({ location }) => {
@@ -17,10 +15,10 @@ const Ready = ({ location }) => {
 
   return (
     <Layout>
-      <Link to="/">
-        <IconBackArrow />
-      </Link>
-      <div className="h-screen w-screen flex justify-center items-center">
+      <div
+        style={{ height: "70vh" }}
+        className="w-screen flex justify-center items-center"
+      >
         <Card color={color} revealed={cardRevealed} onClick={toggleCard}>
           {params.get("value")}
         </Card>

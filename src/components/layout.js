@@ -4,38 +4,38 @@ import { Link } from "gatsby"
 import "./layout.css"
 
 import IconSettingsGear from "./icon-settings-gear"
-import IconHouse from "./icon-house"
+import IconBackArrow from "./icon-back-arrow"
 
 const NAV_ITEMS = [
   {
     to: "/",
-    icon: <IconHouse />,
-    label: "Home",
+    icon: <IconBackArrow />,
   },
+
   {
-    to: "settings",
+    to: "/settings",
     icon: <IconSettingsGear />,
-    label: "Settings",
   },
 ]
 
 const Layout = ({ children }) => {
   return (
     <>
-      <main className="bg-gray-900">{children}</main>
-      <footer className="flex justify-center items-center fixed bottom-0 h-16 bg-gray-800 border-t-2 border-gray-700 w-full">
+      <nav
+        style={{ height: "10vh" }}
+        className="flex justify-end items-center w-full"
+      >
         {NAV_ITEMS.map(ni => (
           <Link
             key={ni.to}
             to={ni.to}
-            className="flex flex-col items-center h-full p-2 w-24"
-            activeClassName="bg-gray-700"
+            className="flex flex-col justify-center items-center h-full p-2 w-24"
           >
             {ni.icon}
-            {ni.label}
           </Link>
         ))}
-      </footer>
+      </nav>
+      <main className="bg-gray-900">{children}</main>
     </>
   )
 }
