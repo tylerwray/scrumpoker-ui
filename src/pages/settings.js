@@ -36,7 +36,6 @@ const modalStyles = {
     maxHeight: "100vh",
     overflowY: "auto",
     backgroundColor: "#2D3748",
-    maxWidth: "960px",
     borderRadius: 0,
     padding: 0,
     border: 0,
