@@ -10,7 +10,11 @@ const Ready = ({ location }) => {
   const [cardRevealed, setCardRevealed] = useState(false)
 
   if (!location.state?.value) {
-    navigate("/")
+    try {
+      navigate("/")
+    } catch (e) {
+      // Supress window not found errors
+    }
     return <Layout />
   }
 
