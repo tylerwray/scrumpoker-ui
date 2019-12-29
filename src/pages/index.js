@@ -18,7 +18,8 @@ const IndexPage = () => {
           <Link
             key={value}
             className="flex justify-center m-4"
-            to={`/ready?value=${value}`}
+            to="/ready/"
+            state={{ value }}
           >
             <Card color={color} size="sm">
               {value}
