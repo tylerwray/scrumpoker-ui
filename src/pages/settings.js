@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import Modal from "react-modal"
-import { navigate } from "gatsby"
 
 import IconClose from "../components/icon-close"
 import useCardColor from "../hooks/useCardColor"
@@ -51,7 +50,7 @@ const Settings = () => {
 
   const closeModal = () => {
     setModalOpen(false)
-    setTimeout(() => navigate("/"), modalCloseTimeout)
+    setTimeout(() => window.history.back(), modalCloseTimeout)
   }
 
   return (
