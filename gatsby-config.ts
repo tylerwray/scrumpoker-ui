@@ -29,6 +29,8 @@ module.exports = {
     },
     `gatsby-plugin-postcss`,
     `gatsby-plugin-offline`,
+    `gatsby-plugin-eslint`,
+    `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {

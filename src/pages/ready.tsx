@@ -9,13 +9,13 @@ const Ready = ({ location }) => {
   const [color] = useCardColor()
   const [cardRevealed, setCardRevealed] = useState(false)
 
-  if (!location.state?.value) {
+  if (location.state?.value == null) {
     try {
       navigate("/")
     } catch (e) {
       // Supress window not found errors
     }
-    return <Layout />
+    return null
   }
 
   function toggleCard() {

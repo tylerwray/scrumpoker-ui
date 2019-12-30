@@ -4,6 +4,7 @@ import Modal from "react-modal"
 import IconClose from "../components/icon-close"
 import useCardColor from "../hooks/useCardColor"
 import Card from "../components/card"
+import Select from "../components/select"
 
 const COLORS = [
   "bg-black",
@@ -26,17 +27,17 @@ const modalStyles = {
     backgroundColor: "#1a202c",
   },
   content: {
-    position: "unset",
+    position: "relative",
     top: "auto",
     bottom: "auto",
     left: "auto",
     right: "auto",
     height: "100%",
     maxHeight: "100vh",
-    overflowY: "auto",
+    overflowY: "scroll",
     backgroundColor: "#2D3748",
+    padding: "1rem",
     borderRadius: 0,
-    padding: 0,
     border: 0,
   },
 }
@@ -61,11 +62,8 @@ const Settings = () => {
       contentLabel="Modal"
       closeTimeoutMS={modalCloseTimeout}
     >
-      <div className="flex justify-end items-center h-16 w-full absolute">
-        <button
-          onClick={closeModal}
-          className="flex flex-col justify-end items-center p-2"
-        >
+      <div className="flex justify-end items-center absolute top-0 right-0">
+        <button onClick={closeModal} className="p-4">
           <IconClose />
         </button>
       </div>
@@ -74,7 +72,16 @@ const Settings = () => {
           144
         </Card>
       </div>
-      <div className="grid grid-fit max-w-lg my-0 mx-auto">
+      <Select value={}>
+        <Select.Header>Color</Select.Header>
+        {COLORS.map(c => (
+          <Select.Option value={c} key={c}>
+            <div className={`h-12 w-12 rounded-lg shadow-inner ${c}`} />
+          </Select.Option>
+        ))}
+      </Select>
+      {/*
+      <div className="grid grid-fit max-w-lg my-0 mx-auto mb-8">
         {COLORS.map(c => (
           <button
             onClick={() => setColor(c)}
@@ -84,7 +91,14 @@ const Settings = () => {
             <div className={`h-12 w-12 rounded-lg shadow-inner ${c}`} />
           </button>
         ))}
-      </div>
+      </div> */}
+      <Select>
+        <Select.Header>Sequence</Select.Header>
+        <Select.Option>Fibonacci</Select.Option>
+        <Select.Option>Manicotti</Select.Option>
+        <Select.Option>Happy Feet</Select.Option>
+        <Select.Option>Nana Patti</Select.Option>
+      </Select>
     </Modal>
   )
 }
