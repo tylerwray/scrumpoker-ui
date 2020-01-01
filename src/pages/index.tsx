@@ -14,7 +14,7 @@ function IndexPage() {
   return (
     <Layout>
       <SEO title="Home" />
-      <div className="grid grid-fit max-w-lg my-0 mx-auto">
+      <div className="grid grid-fit-sm max-w-lg my-0 mx-auto">
         {sequence.map(value => (
           <Link
             key={value}

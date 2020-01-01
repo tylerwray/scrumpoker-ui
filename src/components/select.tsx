@@ -27,7 +27,7 @@ interface BodyProps {
 }
 
 function Body({ children }: BodyProps) {
-  return <div className="grid grid-fit">{children}</div>;
+  return <div className="grid grid-fit-lg">{children}</div>;
 }
 
 // --------- Label ----------

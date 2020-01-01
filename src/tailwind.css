@@ -10,6 +10,10 @@
   display: grid;
 }
 
-.grid-fit {
+.grid-fit-sm {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.grid-fit-lg {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
