@@ -101,7 +101,9 @@ function Select({ children, initialValue = "", onChange }: SelectProps) {
   );
 
   return (
-    <SelectContext.Provider value={context}>{children}</SelectContext.Provider>
+    <SelectContext.Provider value={context}>
+      <div className="p-6">{children}</div>
+    </SelectContext.Provider>
   );
 }
 

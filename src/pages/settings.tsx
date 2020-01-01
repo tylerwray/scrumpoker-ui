@@ -1,68 +1,26 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 
+import useCardColor, {
+  CardColor,
+  cardColorDescriptions
+} from "../hooks/useCardColor";
+import useCardSequence, {
+  CardSequence,
+  cardSequenceDescriptions
+} from "../hooks/useCardSequence";
+import useIDontKnowCard, {
+  IDontKnowCard,
+  iDontKnowCardDescriptions
+} from "../hooks/useIDontKnowCard";
+import useTiredCard, {
+  TiredCard,
+  tiredCardDescriptions
+} from "../hooks/useTiredCard";
+
 import IconClose from "../components/icon-close";
-import useCardColor from "../hooks/useCardColor";
-import useSequence from "../hooks/useSequence";
 import Card from "../components/card";
 import Select from "../components/select";
-
-const COLORS = [
-  { className: "bg-black", name: "Black" },
-  { className: "bg-gray-700", name: "Gray" },
-  { className: "bg-red-500", name: "Red" },
-  { className: "bg-orange-600", name: "Orange" },
-  { className: "bg-yellow-500", name: "Yellow" },
-  { className: "bg-green-500", name: "Green" },
-  { className: "bg-teal-500", name: "Teal" },
-  { className: "bg-blue-500", name: "Blue" },
-  { className: "bg-indigo-500", name: "Indigo" },
-  { className: "bg-purple-500", name: "Purple" },
-  { className: "bg-pink-500", name: "Pink" }
-];
-
-export enum SEQUENCE {
-  FIBONACCI = "fibonacci",
-  T_SHIRT_SIZE = "t-shirt-size",
-  STANDARD = "standard"
-}
-
-export const SEQUENCE_VALUES = {
-  [SEQUENCE.FIBONACCI]: [
-    "0",
-    "1",
-    "2",
-    "3",
-    "5",
-    "8",
-    "13",
-    "21",
-    "34",
-    "55",
-    "89",
-    "144"
-  ],
-  [SEQUENCE.T_SHIRT_SIZE]: ["xs", "sm", "md", "lg", "xl"],
-  [SEQUENCE.STANDARD]: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-};
-
-const SEQUENCES = [
-  {
-    name: "Fibonacci",
-    key: SEQUENCE.FIBONACCI,
-    example: "1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144"
-  },
-  {
-    name: "T-Shirt Sizes",
-    key: SEQUENCE.T_SHIRT_SIZE,
-    example: "xs, sm, md, lg, xl"
-  },
-  {
-    name: "Standard",
-    key: SEQUENCE.STANDARD,
-    example: "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
-  }
-];
 
 Modal.setAppElement("#___gatsby");
 
@@ -90,7 +48,9 @@ const modalCloseTimeout = 50;
 
 function Settings() {
   const [color, setColor] = useCardColor();
-  const { setSequence } = useSequence();
+  const [cardSequence, setCardSequence] = useCardSequence();
+  const [iDontKonwCard, setIDontKnowCard] = useIDontKnowCard();
+  const [tiredCard, setTiredCard] = useTiredCard();
 
   const [modalOpen, setModalOpen] = useState(true);
 
@@ -118,37 +78,61 @@ function Settings() {
         </Card>
       </div>
 
-      <div className="p-6">
-        <Select initialValue={color} onChange={setColor}>
-          <Select.Label>Color</Select.Label>
-          <Select.Body>
-            {COLORS.map(({ className, name }) => (
-              <Select.Option value={className} key={className}>
-                <div className="flex flex-col justify-center items-center px-8 py-6 text-center px-8 py-6">
-                  <div className={`rounded-lg h-12 w-12 ${className}`} />
-                  <div className="mt-3">{name}</div>
-                </div>
-              </Select.Option>
-            ))}
-          </Select.Body>
-        </Select>
-      </div>
+      <Select initialValue={color} onChange={setColor}>
+        <Select.Label>Color</Select.Label>
+        <Select.Body>
+          {Object.values(CardColor).map(key => (
+            <Select.Option value={key} key={key}>
+              <div className="flex flex-col justify-center items-center px-8 py-6 text-center px-8 py-6">
+                <div className={`rounded-lg h-12 w-12 ${key}`} />
+                <div className="mt-3">{cardColorDescriptions[key]}</div>
+              </div>
+            </Select.Option>
+          ))}
+        </Select.Body>
+      </Select>
 
-      <div className="p-6">
-        <Select initialValue={SEQUENCE.FIBONACCI} onChange={setSequence}>
-          <Select.Label>Sequence</Select.Label>
-          <Select.Body>
-            {SEQUENCES.map(({ name, example, key }) => (
-              <Select.Option value={key} key={key}>
-                <div className="p-6">
-                  <h4>{name}</h4>
-                  <span>{example}</span>
-                </div>
-              </Select.Option>
-            ))}
-          </Select.Body>
-        </Select>
-      </div>
+      <Select initialValue={cardSequence} onChange={setCardSequence}>
+        <Select.Label>Card Sequence</Select.Label>
+        <Select.Body>
+          {Object.values(CardSequence).map(key => (
+            <Select.Option value={key} key={key}>
+              <div className="p-6">
+                <h4>{cardSequenceDescriptions[key]}</h4>
+                <span>{key}</span>
+              </div>
+            </Select.Option>
+          ))}
+        </Select.Body>
+      </Select>
+
+      <Select initialValue={iDontKonwCard} onChange={setIDontKnowCard}>
+        <Select.Label>I don&apos;t know card</Select.Label>
+        <Select.Body>
+          {Object.values(IDontKnowCard).map(key => (
+            <Select.Option value={key} key={key}>
+              <div className="flex flex-col justify-center items-center px-8 py-6 text-center px-8 py-6">
+                <div className="text-4xl">{key}</div>
+                <div className="mt-3">{iDontKnowCardDescriptions[key]}</div>
+              </div>
+            </Select.Option>
+          ))}
+        </Select.Body>
+      </Select>
+
+      <Select initialValue={tiredCard} onChange={setTiredCard}>
+        <Select.Label>Tired card</Select.Label>
+        <Select.Body>
+          {Object.values(TiredCard).map(key => (
+            <Select.Option value={key} key={key}>
+              <div className="flex flex-col justify-center items-center px-8 py-6 text-center px-8 py-6">
+                <div className="text-4xl">{key}</div>
+                <div className="mt-3">{tiredCardDescriptions[key]}</div>
+              </div>
+            </Select.Option>
+          ))}
+        </Select.Body>
+      </Select>
     </Modal>
   );
 }
