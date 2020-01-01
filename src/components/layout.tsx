@@ -1,12 +1,16 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
-import "./layout.css"
+import React, { ReactNode } from "react";
+import { Link } from "gatsby";
+import "./layout.css";
 
-import IconSettingsGear from "./icon-settings-gear"
-import IconBackArrow from "./icon-back-arrow"
+import IconSettingsGear from "./icon-settings-gear";
+import IconBackArrow from "./icon-back-arrow";
 
-const Layout = ({ children, showBack = false }) => {
+interface Props {
+  children: ReactNode[] | ReactNode;
+  showBack?: boolean;
+}
+
+function Layout({ children, showBack = false }: Props) {
   return (
     <>
       <nav
@@ -31,12 +35,7 @@ const Layout = ({ children, showBack = false }) => {
       </nav>
       <main className="bg-gray-900">{children}</main>
     </>
-  )
+  );
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  showBack: PropTypes.bool,
-}
-
-export default Layout
+export default Layout;

@@ -1,30 +1,74 @@
-import React, { useState } from "react"
-import Modal from "react-modal"
+import React, { useState } from "react";
+import Modal from "react-modal";
 
-import IconClose from "../components/icon-close"
-import useCardColor from "../hooks/useCardColor"
-import Card from "../components/card"
-import Select from "../components/select"
+import IconClose from "../components/icon-close";
+import useCardColor from "../hooks/useCardColor";
+import useSequence from "../hooks/useSequence";
+import Card from "../components/card";
+import Select from "../components/select";
 
 const COLORS = [
-  "bg-black",
-  "bg-gray-700",
-  "bg-red-500",
-  "bg-orange-600",
-  "bg-yellow-500",
-  "bg-green-500",
-  "bg-teal-500",
-  "bg-blue-500",
-  "bg-indigo-500",
-  "bg-purple-500",
-  "bg-pink-500",
-]
+  { className: "bg-black", name: "Black" },
+  { className: "bg-gray-700", name: "Gray" },
+  { className: "bg-red-500", name: "Red" },
+  { className: "bg-orange-600", name: "Orange" },
+  { className: "bg-yellow-500", name: "Yellow" },
+  { className: "bg-green-500", name: "Green" },
+  { className: "bg-teal-500", name: "Teal" },
+  { className: "bg-blue-500", name: "Blue" },
+  { className: "bg-indigo-500", name: "Indigo" },
+  { className: "bg-purple-500", name: "Purple" },
+  { className: "bg-pink-500", name: "Pink" }
+];
 
-Modal.setAppElement("#___gatsby")
+export enum SEQUENCE {
+  FIBONACCI = "fibonacci",
+  T_SHIRT_SIZE = "t-shirt-size",
+  STANDARD = "standard"
+}
+
+export const SEQUENCE_VALUES = {
+  [SEQUENCE.FIBONACCI]: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "5",
+    "8",
+    "13",
+    "21",
+    "34",
+    "55",
+    "89",
+    "144"
+  ],
+  [SEQUENCE.T_SHIRT_SIZE]: ["xs", "sm", "md", "lg", "xl"],
+  [SEQUENCE.STANDARD]: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+};
+
+const SEQUENCES = [
+  {
+    name: "Fibonacci",
+    key: SEQUENCE.FIBONACCI,
+    example: "1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144"
+  },
+  {
+    name: "T-Shirt Sizes",
+    key: SEQUENCE.T_SHIRT_SIZE,
+    example: "xs, sm, md, lg, xl"
+  },
+  {
+    name: "Standard",
+    key: SEQUENCE.STANDARD,
+    example: "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+  }
+];
+
+Modal.setAppElement("#___gatsby");
 
 const modalStyles = {
   overlay: {
-    backgroundColor: "#1a202c",
+    backgroundColor: "#1a202c"
   },
   content: {
     position: "relative",
@@ -36,22 +80,23 @@ const modalStyles = {
     maxHeight: "100vh",
     overflowY: "scroll",
     backgroundColor: "#2D3748",
-    padding: "1rem",
+    padding: 0,
     borderRadius: 0,
-    border: 0,
-  },
-}
+    border: 0
+  }
+};
 
-const modalCloseTimeout = 50
+const modalCloseTimeout = 50;
 
-const Settings = () => {
-  const [color, setColor] = useCardColor()
+function Settings() {
+  const [color, setColor] = useCardColor();
+  const { setSequence } = useSequence();
 
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(true);
 
-  const closeModal = () => {
-    setModalOpen(false)
-    setTimeout(() => window.history.back(), modalCloseTimeout)
+  function closeModal() {
+    setModalOpen(false);
+    setTimeout(() => window.history.back(), modalCloseTimeout);
   }
 
   return (
@@ -68,39 +113,44 @@ const Settings = () => {
         </button>
       </div>
       <div className="flex justify-center my-12">
-        <Card size="sm" revealed color={color}>
+        <Card size="sm" color={color}>
           144
         </Card>
       </div>
-      <Select value={}>
-        <Select.Header>Color</Select.Header>
-        {COLORS.map(c => (
-          <Select.Option value={c} key={c}>
-            <div className={`h-12 w-12 rounded-lg shadow-inner ${c}`} />
-          </Select.Option>
-        ))}
-      </Select>
-      {/*
-      <div className="grid grid-fit max-w-lg my-0 mx-auto mb-8">
-        {COLORS.map(c => (
-          <button
-            onClick={() => setColor(c)}
-            key={c}
-            className="flex justify-center items-center m-4 cursor-pointer"
-          >
-            <div className={`h-12 w-12 rounded-lg shadow-inner ${c}`} />
-          </button>
-        ))}
-      </div> */}
-      <Select>
-        <Select.Header>Sequence</Select.Header>
-        <Select.Option>Fibonacci</Select.Option>
-        <Select.Option>Manicotti</Select.Option>
-        <Select.Option>Happy Feet</Select.Option>
-        <Select.Option>Nana Patti</Select.Option>
-      </Select>
+
+      <div className="p-6">
+        <Select initialValue={color} onChange={setColor}>
+          <Select.Label>Color</Select.Label>
+          <Select.Body>
+            {COLORS.map(({ className, name }) => (
+              <Select.Option value={className} key={className}>
+                <div className="flex flex-col justify-center items-center px-8 py-6 text-center px-8 py-6">
+                  <div className={`rounded-lg h-12 w-12 ${className}`} />
+                  <div className="mt-3">{name}</div>
+                </div>
+              </Select.Option>
+            ))}
+          </Select.Body>
+        </Select>
+      </div>
+
+      <div className="p-6">
+        <Select initialValue={SEQUENCE.FIBONACCI} onChange={setSequence}>
+          <Select.Label>Sequence</Select.Label>
+          <Select.Body>
+            {SEQUENCES.map(({ name, example, key }) => (
+              <Select.Option value={key} key={key}>
+                <div className="p-6">
+                  <h4>{name}</h4>
+                  <span>{example}</span>
+                </div>
+              </Select.Option>
+            ))}
+          </Select.Body>
+        </Select>
+      </div>
     </Modal>
-  )
+  );
 }
 
-export default Settings
+export default Settings;

@@ -1,31 +1,32 @@
-import React from "react"
-import { node, bool, func, oneOf, string } from "prop-types"
+import React, { ReactNode, MouseEvent } from "react";
 
 const BASE =
-  "text-white border-white rounded-lg border-2 flex justify-center items-center cursor-pointer select-none"
+  "text-white border-white rounded-lg border-2 flex justify-center items-center cursor-pointer select-none focus:outline-none focus:shadow-outline";
 const SIZES = {
   sm: "w-16 h-24 text-3xl",
-  lg: "w-48 h-64 text-6xl",
+  lg: "w-48 h-64 text-huge"
+};
+
+interface Props {
+  children: ReactNode;
+  revealed?: boolean;
+  onClick?(event: MouseEvent<HTMLButtonElement>): void;
+  size?: "sm" | "lg";
+  color?: string;
 }
 
-const Card = ({
+function Card({
   children,
   revealed = true,
   onClick,
   size = "lg",
-  color = "bg-red-400",
-}) => (
-  <button onClick={onClick} className={`${BASE} ${SIZES[size]} ${color}`}>
-    {revealed && children}
-  </button>
-)
-
-Card.propTypes = {
-  children: node.isRequired,
-  revealed: bool,
-  onClick: func,
-  size: oneOf(["sm", "lg"]),
-  color: string,
+  color = "bg-red-400"
+}: Props) {
+  return (
+    <button onClick={onClick} className={`${BASE} ${SIZES[size]} ${color}`}>
+      {revealed && children}
+    </button>
+  );
 }
 
-export default Card
+export default Card;

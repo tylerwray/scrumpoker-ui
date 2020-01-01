@@ -1,5 +1,5 @@
 {
-  "plugins": ["react-hooks"],
+  "plugins": ["react-hooks", "@typescript-eslint", "prettier"],
   "env": {
     "browser": true,
     "node": true
@@ -13,14 +13,18 @@
     }
   },
   "rules": {
-    "strict": 0,
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
+    // "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "settings": {
     "react": {

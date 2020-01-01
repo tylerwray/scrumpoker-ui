@@ -1,20 +1,21 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import { Link } from "gatsby";
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Card from "../components/card"
-import useCardColor from "../hooks/useCardColor"
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import Card from "../components/card";
+import useCardColor from "../hooks/useCardColor";
+import useSequence from "../hooks/useSequence";
 
-const VALUES = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
+function IndexPage() {
+  const [color] = useCardColor();
+  const { sequence } = useSequence();
 
-const IndexPage = () => {
-  const [color] = useCardColor()
   return (
     <Layout>
       <SEO title="Home" />
       <div className="grid grid-fit max-w-lg my-0 mx-auto">
-        {VALUES.map(value => (
+        {sequence.map(value => (
           <Link
             key={value}
             className="flex justify-center m-4"
@@ -28,7 +29,7 @@ const IndexPage = () => {
         ))}
       </div>
     </Layout>
-  )
+  );
 }
 
-export default IndexPage
+export default IndexPage;

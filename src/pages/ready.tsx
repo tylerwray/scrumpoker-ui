@@ -1,25 +1,25 @@
-import React, { useState } from "react"
-import { navigate } from "gatsby"
+import React, { useState } from "react";
+import { navigate, PageRendererProps } from "gatsby";
 
-import Card from "../components/card"
-import Layout from "../components/layout"
-import useCardColor from "../hooks/useCardColor"
+import Card from "../components/card";
+import Layout from "../components/layout";
+import useCardColor from "../hooks/useCardColor";
 
-const Ready = ({ location }) => {
-  const [color] = useCardColor()
-  const [cardRevealed, setCardRevealed] = useState(false)
+const Ready = ({ location }: PageRendererProps) => {
+  const [color] = useCardColor();
+  const [cardRevealed, setCardRevealed] = useState(false);
 
   if (location.state?.value == null) {
     try {
-      navigate("/")
+      navigate("/");
     } catch (e) {
       // Supress window not found errors
     }
-    return null
+    return null;
   }
 
   function toggleCard() {
-    setCardRevealed(v => !v)
+    setCardRevealed(v => !v);
   }
 
   return (
@@ -33,7 +33,7 @@ const Ready = ({ location }) => {
         </Card>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Ready
+export default Ready;
