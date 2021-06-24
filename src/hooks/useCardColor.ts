@@ -3,15 +3,15 @@ import useLocalStorage from "./useLocalStorage";
 export enum CardColor {
   Black = "bg-black",
   Gray = "bg-gray-800",
-  Red = "bg-red-500",
+  Red = "bg-red-700",
   Orange = "bg-orange-600",
-  Yellow = "bg-yellow-500",
-  Green = "bg-green-500",
-  Teal = "bg-teal-500",
-  Blue = "bg-blue-500",
-  Indigo = "bg-indigo-500",
-  Purple = "bg-purple-500",
-  Pink = "bg-pink-500"
+  Yellow = "bg-yellow-600",
+  Green = "bg-green-700",
+  Teal = "bg-teal-700",
+  Blue = "bg-blue-700",
+  Indigo = "bg-indigo-700",
+  Purple = "bg-purple-700",
+  Pink = "bg-pink-700"
 }
 
 export const cardColorDescriptions = {
