@@ -8,6 +8,7 @@
 }
 
 .card-face {
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
