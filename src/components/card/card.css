@@ -8,8 +8,11 @@
 }
 
 .card-face {
+  -webkit-user-select: none;
   -webkit-backface-visibility: hidden;
+  user-select: none;
   backface-visibility: hidden;
+
 }
 
 .card-back {

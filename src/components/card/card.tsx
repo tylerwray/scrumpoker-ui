@@ -2,7 +2,7 @@ import React, { ReactNode, MouseEvent } from "react";
 import "./card.css";
 
 const BASE =
-  "absolute w-full h-full text-white border-white rounded-lg border-2 cursor-pointer select-none focus:outline-none focus:shadow-outline flex justify-center items-center";
+  "absolute w-full h-full text-white border-white rounded-lg border-2 cursor-pointer focus:outline-none focus:shadow-outline flex justify-center items-center";
 
 const SIZES = {
   sm: "w-16 h-24 text-3xl",
